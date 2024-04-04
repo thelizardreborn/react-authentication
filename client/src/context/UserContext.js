@@ -28,7 +28,7 @@ export const UserProvider = (props) => {
   }
 
   const signOut = () => {
-
+    setAuthUser(null);
   }
 
   return (
@@ -36,6 +36,7 @@ export const UserProvider = (props) => {
       authUser,
       actions: {
         signIn,
+        signOut,
       }
     }}>
       {props.children}

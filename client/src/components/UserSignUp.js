@@ -1,8 +1,10 @@
 import { useContext, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ThemeContext from '../context/ThemeContext';
+import UserContext from '../context/UserContext';
 
 const UserSignIn = () => {
+  const { actions } = useContext(UserContext);
   const { accentColor } = useContext(ThemeContext);
   const navigate = useNavigate();
 
@@ -35,6 +37,8 @@ const UserSignIn = () => {
       const response = await fetch("http://localhost:5000/api/users", fetchOptions);
       if (response.status === 201) {
         console.log(`${user.username} is successfully signed up and authenticated!`);
+        await actions.signIn(user);
+        navigate("/authenticated");
       } else if (response.status === 400) {
         const data = await response.json();
         setErrors(data.errors);
