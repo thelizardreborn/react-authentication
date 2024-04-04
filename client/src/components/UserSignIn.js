@@ -2,6 +2,7 @@ import { useContext, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ThemeContext from '../context/ThemeContext';
 import UserContext from '../context/UserContext';
+import ErrorsDisplay from './ErrorsDisplay';
 
 const UserSignIn = () => {
   const { accentColor } = useContext(ThemeContext);
@@ -50,16 +51,7 @@ const UserSignIn = () => {
       <div className="grid-33 centered signin">
         <h1>Sign in</h1>
         <div>
-          {errors.length ? (
-            <div>
-              <h2 className="validation--errors--label">Validation errors</h2>
-              <div className="validation-errors">
-                <ul>
-                  {errors.map((error, i) => <li key={i}>{error}</li>)}
-                </ul>
-              </div>
-            </div>
-          ) : null}
+          {<ErrorsDisplay errors={errors} />}
           <form onSubmit={handleSubmit}>
             <input
               id="username"
