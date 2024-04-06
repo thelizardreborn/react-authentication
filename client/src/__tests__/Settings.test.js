@@ -1,8 +1,8 @@
 import React from "react";
 import { fireEvent, render, screen } from '@testing-library/react';
 import Settings from '../components/Settings';
-import ThemeContext, { ThemeProvider } from '../context/ThemeContext';
-import Cookie from 'js-cookie'
+import { ThemeProvider } from '../context/ThemeContext';
+import Cookie from 'js-cookie';
 
 
 test("Settings renders successfully", () => {

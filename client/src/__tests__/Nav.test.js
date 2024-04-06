@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import UserContext, { UserProvider } from '../context/UserContext';
+import { render, screen } from '@testing-library/react';
+import { UserProvider } from '../context/UserContext';
 import Nav from '../components/Nav';
-import ThemeContext, { ThemeProvider } from '../context/ThemeContext';
+import { ThemeProvider } from '../context/ThemeContext';
 import { BrowserRouter } from 'react-router-dom';
-import Cookie from 'js-cookie'
+import Cookie from 'js-cookie';
 
 test("Nav anon renders successfully", () => {
    render(

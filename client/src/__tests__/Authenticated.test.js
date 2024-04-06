@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Authenticated from '../components/Authenticated';
-import UserContext, { UserProvider } from '../context/UserContext';
+import { UserProvider } from '../context/UserContext';
 import Cookie from 'js-cookie';
 
 test("Authenticated renders successfully", () => {
