@@ -1,35 +1,18 @@
 import { render, screen } from '@testing-library/react'
-import UserContext from '../context/UserContext';
+import UserContext, { UserProvider } from '../context/UserContext';
 import Nav from '../components/Nav';
-import ThemeContext from '../context/ThemeContext';
+import ThemeContext, { ThemeProvider } from '../context/ThemeContext';
 import { BrowserRouter } from 'react-router-dom';
+import Cookie from 'js-cookie'
 
 test("Nav anon renders successfully", () => {
-   const anonUser = {
-      authUser: null,
-      actions: {
-         signIn: jest.fn(),
-         signOut: jest.fn(),
-      }
-   }
-   const defaultTheme = {
-      isDarkMode: false,
-      accentColor: '#63537d',
-      fontPercentage: 100,
-      actions: {
-         toggleDarkMode: jest.fn(),
-         updateAccentColor: jest.fn(),
-         updateFontPercentage: jest.fn()
-      }
-   }
-
    render(
       <BrowserRouter>
-         <ThemeContext.Provider value={defaultTheme}>
-            <UserContext.Provider value={anonUser}>
+         <ThemeProvider>
+            <UserProvider>
                <Nav />
-            </UserContext.Provider>
-         </ThemeContext.Provider>
+            </UserProvider>
+         </ThemeProvider>
       </BrowserRouter>);
 
    const welcome = screen.queryByText(`Welcome`);
@@ -49,33 +32,19 @@ test("Nav auth renders successfully", () => {
    const name = 'Test Name';
    const username = 'testusername';
    const authUser = {
-      authUser: {
-         name,
-         username
-      },
-      actions: {
-         signIn: jest.fn(),
-         signOut: jest.fn(),
-      }
+      name,
+      username
    }
-   const defaultTheme = {
-      isDarkMode: false,
-      accentColor: '#63537d',
-      fontPercentage: 100,
-      actions: {
-         toggleDarkMode: jest.fn(),
-         updateAccentColor: jest.fn(),
-         updateFontPercentage: jest.fn()
-      }
-   }
+
+   Cookie.get = jest.fn().mockImplementation(() => JSON.stringify(authUser));
 
    render(
       <BrowserRouter>
-         <ThemeContext.Provider value={defaultTheme}>
-            <UserContext.Provider value={authUser}>
+         <ThemeProvider>
+            <UserProvider>
                <Nav />
-            </UserContext.Provider>
-         </ThemeContext.Provider>
+            </UserProvider>
+         </ThemeProvider>
       </BrowserRouter>);
 
    const welcome = screen.queryByText(`Welcome ${name}`);

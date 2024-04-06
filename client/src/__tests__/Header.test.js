@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import Header from '../components/Header';
-import ThemeContext from '../context/ThemeContext';
-import UserContext from '../context/UserContext';
+import ThemeContext, { ThemeProvider } from '../context/ThemeContext';
+import UserContext, { UserProvider } from '../context/UserContext';
 import { BrowserRouter } from 'react-router-dom';
 
 test("Header renders successfully", () => {
@@ -28,11 +28,11 @@ test("Header renders successfully", () => {
 
    render(
       <BrowserRouter>
-         <ThemeContext.Provider value={defaultTheme}>
-            <UserContext.Provider value={authUser}>
+         <ThemeProvider>
+            <UserProvider>
                <Header />
-            </UserContext.Provider>
-         </ThemeContext.Provider>
+            </UserProvider>
+         </ThemeProvider>
       </BrowserRouter>);
 
    const appTitle = screen.getByText("MyAuth");

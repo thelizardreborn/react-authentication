@@ -1,27 +1,22 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react';
 import Authenticated from '../components/Authenticated';
-import UserContext from '../context/UserContext';
+import UserContext, { UserProvider } from '../context/UserContext';
+import Cookie from 'js-cookie';
 
 test("Authenticated renders successfully", () => {
    const name = 'Test Name';
    const username = 'testusername';
-   const signIn = jest.fn();
-   const signOut = jest.fn();
    const authUser = {
       name,
       username
-   };
+   }
+
+   Cookie.get = jest.fn().mockImplementation(() => JSON.stringify(authUser));
 
    render(
-      <UserContext.Provider value={{
-         authUser,
-         actions: {
-            signIn,
-            signOut,
-         }
-      }}>
+      <UserProvider>
          <Authenticated />
-      </UserContext.Provider>);
+      </UserProvider>);
 
    const nameElement = screen.getByText(`${name} is Authenticated`);
    const usernameElement = screen.getByText(`Your username is ${username}`);

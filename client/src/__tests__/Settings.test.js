@@ -1,25 +1,15 @@
 import React from "react";
 import { fireEvent, render, screen } from '@testing-library/react';
 import Settings from '../components/Settings';
-import ThemeContext from '../context/ThemeContext';
+import ThemeContext, { ThemeProvider } from '../context/ThemeContext';
+import Cookie from 'js-cookie'
 
 
 test("Settings renders successfully", () => {
-   const defaultTheme = {
-      isDarkMode: false,
-      accentColor: '#63537d',
-      fontPercentage: 100,
-      actions: {
-         toggleDarkMode: jest.fn(),
-         updateAccentColor: jest.fn(),
-         updateFontPercentage: jest.fn()
-      }
-   }
-
    render(
-      <ThemeContext.Provider value={defaultTheme}>
+      <ThemeProvider>
          <Settings />
-      </ThemeContext.Provider>
+      </ThemeProvider>
    );
 
    const darkModeSwitch = screen.getByRole("checkbox", {className: "darkMode-selector"});
