@@ -66,8 +66,8 @@ const UserSignIn = () => {
               ref={password}
               placeholder="Password" />
             <div className="pad-bottom">
-              <button className="button" type="submit" style={{ background: accentColor }}>Sign in</button>
-              <button className="button button-secondary" style={{ color: accentColor }} onClick={handleCancel}>Cancel</button>
+              <button data-testid="signInButton" className="button" type="submit" style={{ background: accentColor }}>Sign in</button>
+              <button data-testid="cancelButton" className="button button-secondary" style={{ color: accentColor }} onClick={handleCancel}>Cancel</button>
             </div>
           </form>
         </div>
