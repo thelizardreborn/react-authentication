@@ -114,6 +114,28 @@ test("User signin bad credentials", async () => {
    });
 })
 
+test("User signin unexpected response", async () => {
+   jest.spyOn(global, 'fetch').mockResolvedValue({
+      status: 123,
+   })
+
+   render(
+      <BrowserRouter>
+         <ThemeProvider>
+            <UserProvider>
+               <UserSignIn />
+            </UserProvider>
+         </ThemeProvider>
+      </BrowserRouter>);
+
+   const signinButton = screen.getByTestId("signInButton");
+   fireEvent.click(signinButton);
+
+   await waitFor(() => {
+      expect(mockedNavigate).toHaveBeenCalledWith("/error");
+   });
+})
+
 test("User signin server error", async () => {
    jest.spyOn(global, 'fetch').mockImplementation(() => {
       throw new Error('test error handling');
