@@ -94,9 +94,9 @@ test("User signup bad credentials", async () => {
    ;
    const mockResponse = {
       "errors":[
-         'Please provide a value for \"name\"',
-         'Please provide a value for \"username\"',
-         'Please provide a value for \"password\"'
+         'Please provide a value for "name"',
+         'Please provide a value for "username"',
+         'Please provide a value for "password"'
       ]
    };
 
