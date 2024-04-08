@@ -57,24 +57,27 @@ const UserSignIn = () => {
             <input
               id="name"
               name="name"
+              data-testid="nameInput"
               type="text"
               ref={name}
               placeholder="Name" />
             <input
               id="username"
               name="username"
+              data-testid="usernameInput"
               type="text"
               ref={username}
               placeholder="User Name" />
             <input
               id="password"
               name="password"
+              data-testid="passwordInput"
               type="password"
               ref={password}
               placeholder="Password" />
             <div className="pad-bottom">
-              <button className="button" type="submit" style={{ background: accentColor }}>Sign up</button>
-              <button className="button button-secondary" style={{ color: accentColor }} onClick={handleCancel}>Cancel</button>
+              <button data-testid="signUpButton" className="button" type="submit" style={{ background: accentColor }}>Sign up</button>
+              <button data-testid="cancelButton" className="button button-secondary" style={{ color: accentColor }} onClick={handleCancel}>Cancel</button>
             </div>
           </form>
         </div>
