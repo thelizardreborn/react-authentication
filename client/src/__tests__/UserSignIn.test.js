@@ -115,8 +115,8 @@ test("User signin bad credentials", async () => {
 })
 
 test("User signin server error", async () => {
-   jest.spyOn(global, 'fetch').mockResolvedValue({
-      status: 500,
+   jest.spyOn(global, 'fetch').mockImplementation(() => {
+      throw new Error('test error handling');
    })
 
 
