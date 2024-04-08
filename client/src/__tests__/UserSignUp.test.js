@@ -90,9 +90,43 @@ test("User signup submitted successfully", async () => {
    });
 })
 
-test.skip("User signup server error", async () => {
+test("User signup bad credentials", async () => {
+   ;
+   const mockResponse = {
+      "errors":[
+         'Please provide a value for \"name\"',
+         'Please provide a value for \"username\"',
+         'Please provide a value for \"password\"'
+      ]
+   };
+
    jest.spyOn(global, 'fetch').mockResolvedValue({
-      status: 500
+      status: 400,
+      json: jest.fn().mockResolvedValue(mockResponse),
+   })
+
+
+   render(
+      <BrowserRouter>
+         <ThemeProvider>
+            <UserProvider>
+               <UserSignUp />
+            </UserProvider>
+         </ThemeProvider>
+      </BrowserRouter>);
+
+   const signinButton = screen.getByTestId("signUpButton");
+   fireEvent.click(signinButton);
+
+   await waitFor(() => {
+      const errorDisplay = screen.getByText("Validation errors");
+      expect(errorDisplay).toBeInTheDocument();
+   });
+})
+
+test("User signup server error", async () => {
+   jest.spyOn(global, 'fetch').mockImplementation(() => {
+      throw new Error('test error handling');
    })
 
    render(
