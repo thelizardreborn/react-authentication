@@ -4,13 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import UserSignOut from '../components/UserSignOut';
 import { createMemoryHistory } from 'history';
 
-const mockedNavigate = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-   ...jest.requireActual('react-router-dom'),
-   useNavigate: () => mockedNavigate,
-}));
-
 
 test("User signout renders successfully", async () => {
    const history = createMemoryHistory();

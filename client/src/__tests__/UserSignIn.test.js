@@ -11,6 +11,9 @@ jest.mock('react-router-dom', () => ({
    useNavigate: () => mockedNavigate,
 }));
 
+afterEach(() => {
+   jest.restoreAllMocks();
+ });
 
 test("User signin renders successfully", () => {
    render(
@@ -112,14 +115,8 @@ test("User signin bad credentials", async () => {
 })
 
 test("User signin server error", async () => {
-   ;
-   const mockResponse = {
-      message: "Access denied"
-   };
-
    jest.spyOn(global, 'fetch').mockResolvedValue({
       status: 500,
-      json: jest.fn().mockResolvedValue(mockResponse),
    })
 
 
